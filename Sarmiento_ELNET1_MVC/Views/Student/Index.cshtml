@@ -4,71 +4,131 @@
     ViewData["Title"] = "Student List";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="mb-0">📋 Student List</h2>
-    <a asp-controller="Student" asp-action="Create" class="btn btn-success">
-        ➕ Add New Student
-    </a>
-</div>
+<div class="container mt-4">
 
-@if (Model == null || Model.Count == 0)
-{
-    <div class="alert alert-info text-center">
-        <strong>No students found.</strong> Click "Add New Student" to get started!
+    <div class="card p-4 shadow-sm mb-5">
+        <h3 class="mb-3">➕ Add Student</h3>
+
+        <form asp-action="Index" method="post">
+            <div class="row g-3">
+
+                <div class="col-md-3">
+                    <label class="form-label fw-semibold">Student ID</label>
+                    <input type="text"
+                           name="Id"
+                           class="form-control"
+                           pattern="[0-9]*"
+                           inputmode="numeric"
+                           required />
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label fw-semibold">Name</label>
+                    <input type="text" name="Name" class="form-control" required />
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label fw-semibold">Course</label>
+                    <select name="Course" class="form-select" required>
+                        <option value="">-- Select Course --</option>
+                        <option value="BSIT">BSIT</option>
+                        <option value="BSCS">BSCS</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label fw-semibold">Age</label>
+                    <input type="number" name="Age" class="form-control" placeholder="e.g. 20" required />
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3 px-4">
+                💾 Add Student
+            </button>
+        </form>
     </div>
-}
-else
-{
-    <table class="table table-bordered table-hover table-striped">
-        <thead class="table-primary">
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Course</th>
-                <th>Age</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
 
-            @{ int rowNum = 1; }
+    @if (Model == null || Model.Count == 0)
+    {
+        <div class="alert alert-info text-center">
+            <strong>No students yet.</strong> Fill out the form above to add a student!
+        </div>
+    }
+    else
+    {
+        <h4 class="mb-3">🎓 Student Records — <span class="text-muted fs-6">@Model.Count student(s) found</span></h4>
+
+        <div class="row g-4">
+
+            @{
+                int rowNum = 1;
+            }
 
             @foreach (var student in Model)
             {
-                <tr>
-                    <td>@rowNum</td>
-                    <td>@student.Name</td>
-                    <td>@student.Course</td>
-                    <td>@student.Age</td>
+                <div class="col-md-4">
+                    <div class="card shadow-sm h-100 border-0">
 
-                    <td>
-                        @if (student.Age >= 18)
-                        {
-                            <span class="badge bg-success">Adult</span>
-                        }
-                        else
-                        {
-                            <span class="badge bg-warning text-dark">Minor</span>
-                        }
-                    </td>
+                        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                            <span class="fw-bold">🎓 @student.Name</span>
+                            <span class="badge bg-light text-primary">#@rowNum</span>
+                        </div>
 
-                    <td>
-                        <a asp-controller="Student"
-                           asp-action="Delete"
-                           asp-route-id="@student.Id"
-                           class="btn btn-danger btn-sm"
-                           onclick="return confirm('Are you sure you want to delete @student.Name?')">
-                            🗑️ Delete
-                        </a>
-                    </td>
-                </tr>
+                        <div class="card-body">
+                            <p class="mb-2">
+                                <strong>📚 Course:</strong>
+                                <span class="text-primary fw-semibold">@student.Course</span>
+                            </p>
+                            <p class="mb-2">
+                                <strong>🎂 Age:</strong> @student.Age years old
+                            </p>
+                            <p class="mb-2">
+                                <strong>📋 Status:</strong>
+                                @if (student.Age >= 18)
+                                {
+                                    <span class="badge bg-success">✅ Adult</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning text-dark">⚠️ Minor</span>
+                                }
+                            </p>
+                        </div>
+
+                        <div class="card-footer bg-transparent border-top d-flex gap-2 justify-content-end">
+
+                            <a asp-controller="Student"
+                               asp-action="Details"
+                               asp-route-id="@student.Id"
+                               class="btn btn-info btn-sm text-white">
+                                👁️ View
+                            </a>
+
+                            <a asp-controller="Student"
+                               asp-action="Edit"
+                               asp-route-id="@student.Id"
+                               class="btn btn-warning btn-sm">
+                                ✏️ Edit
+                            </a>
+
+                            <a asp-controller="Student"
+                               asp-action="Delete"
+                               asp-route-id="@student.Id"
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('Are you sure you want to delete @student.Name?')">
+                                🗑️ Delete
+                            </a>
+
+                        </div>
+
+                    </div>
+                </div>
 
                 rowNum++;
             }
 
-        </tbody>
-    </table>
+        </div>
+    }
 
-    <p class="text-muted">Total students: <strong>@Model.Count</strong></p>
-}
+</div>

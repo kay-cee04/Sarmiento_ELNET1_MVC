@@ -1,0 +1,76 @@
+@model Student
+
+@{
+    ViewData["Title"] = "Student Details";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow border-0">
+
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0">👁️ Student Details</h4>
+                </div>
+
+                <div class="card-body p-4">
+
+                    <table class="table table-borderless">
+                        <tr>
+                            <th width="150">🪪 Student ID</th>
+                            <td>@Model.Id</td>
+                        </tr>
+                        <tr>
+                            <th>🎓 Name</th>
+                            <td>@Model.Name</td>
+                        </tr>
+                        <tr>
+                            <th>📚 Course</th>
+                            <td>
+                                <span class="badge bg-primary fs-6">@Model.Course</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>🎂 Age</th>
+                            <td>@Model.Age years old</td>
+                        </tr>
+                        <tr>
+                            <th>📋 Status</th>
+                            <td>
+                                @if (Model.Age >= 18)
+                                {
+                                    <span class="badge bg-success fs-6">✅ Adult</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning text-dark fs-6">⚠️ Minor</span>
+                                }
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+
+                <div class="card-footer bg-transparent d-flex gap-2">
+
+                    <a asp-controller="Student"
+                       asp-action="Edit"
+                       asp-route-id="@Model.Id"
+                       class="btn btn-warning">
+                        ✏️ Edit
+                    </a>
+
+                    <a asp-controller="Student"
+                       asp-action="Index"
+                       class="btn btn-secondary">
+                        ◀ Back to List
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

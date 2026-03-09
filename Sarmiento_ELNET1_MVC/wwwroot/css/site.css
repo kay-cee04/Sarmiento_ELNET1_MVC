@@ -1,1 +1,546 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600&family=DM+Sans:wght@300;400;500;600&display=swap');
 
+:root {
+    --navy: #1a2744;
+    --navy-mid: #243057;
+    --accent: #c8a96e;
+    --accent-lt: #f5efe4;
+    --bg: #f7f8fa;
+    --white: #ffffff;
+    --border: #dde2ec;
+    --text: #1e2535;
+    --text-muted: #6b7490;
+    --success: #2d7a4f;
+    --warning: #a05c00;
+    --danger: #b03030;
+    --info: #1d5f8a;
+    --radius: 6px;
+    --shadow: 0 2px 12px rgba(26,39,68,0.08);
+    --shadow-md: 0 4px 24px rgba(26,39,68,0.12);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    background-color: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.sis-navbar {
+    background-color: var(--navy);
+    padding: 0;
+    border-bottom: 3px solid var(--accent);
+}
+
+    .sis-navbar .navbar-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 62px;
+    }
+
+    .sis-navbar .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+    }
+
+    .sis-navbar .brand-logo {
+        width: 36px;
+        height: 36px;
+        background: var(--accent);
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Source Serif 4', serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--navy);
+    }
+
+    .sis-navbar .brand-text {
+        font-family: 'Source Serif 4', serif;
+        font-size: 17px;
+        font-weight: 600;
+        color: var(--white);
+        letter-spacing: 0.3px;
+    }
+
+    .sis-navbar .brand-sub {
+        font-size: 11px;
+        color: var(--accent);
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        display: block;
+        line-height: 1;
+        margin-top: 1px;
+    }
+
+    .sis-navbar .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+        .sis-navbar .nav-links a {
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: var(--radius);
+            transition: all 0.15s;
+            letter-spacing: 0.2px;
+        }
+
+            .sis-navbar .nav-links a:hover,
+            .sis-navbar .nav-links a.active {
+                background: rgba(200,169,110,0.15);
+                color: var(--accent);
+            }
+
+.sis-header-banner {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 0;
+}
+
+    .sis-header-banner .inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .sis-header-banner .sys-name {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--navy);
+        letter-spacing: 0.5px;
+    }
+
+    .sis-header-banner .welcome {
+        font-size: 13px;
+        color: var(--text-muted);
+    }
+
+.sis-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 6rem;
+}
+
+.page-title {
+    font-family: 'Source Serif 4', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 4px;
+}
+
+.page-subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+.sis-form-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 2.5rem;
+    overflow: hidden;
+}
+
+    .sis-form-card .card-head {
+        background: var(--navy);
+        padding: 14px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+        .sis-form-card .card-head h5 {
+            font-family: 'Source Serif 4', serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--white);
+            letter-spacing: 0.3px;
+        }
+
+        .sis-form-card .card-head span {
+            font-size: 12px;
+            color: var(--accent);
+            letter-spacing: 0.5px;
+        }
+
+    .sis-form-card .card-body {
+        padding: 24px;
+    }
+
+.form-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+    letter-spacing: 0.2px;
+}
+
+.form-control, .form-select {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 9px 12px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    transition: border-color 0.15s, box-shadow 0.15s;
+    width: 100%;
+}
+
+    .form-control:focus, .form-select:focus {
+        outline: none;
+        border-color: var(--navy);
+        box-shadow: 0 0 0 3px rgba(26,39,68,0.08);
+    }
+
+    .form-control::placeholder {
+        color: #b0b8cc;
+    }
+
+.btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px;
+    font-weight: 500;
+    padding: 9px 20px;
+    border-radius: var(--radius);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s;
+    letter-spacing: 0.2px;
+}
+
+.btn-primary {
+    background: var(--navy);
+    color: var(--white);
+}
+
+    .btn-primary:hover {
+        background: var(--navy-mid);
+        color: var(--white);
+    }
+
+.btn-view {
+    background: var(--accent-lt);
+    color: var(--navy);
+    border: 1px solid #e0d5be;
+}
+
+    .btn-view:hover {
+        background: #ede4d0;
+        color: var(--navy);
+    }
+
+.btn-edit {
+    background: #fff8ec;
+    color: var(--warning);
+    border: 1px solid #f0ddb0;
+}
+
+    .btn-edit:hover {
+        background: #ffefd0;
+        color: var(--warning);
+    }
+
+.btn-delete {
+    background: #fff4f4;
+    color: var(--danger);
+    border: 1px solid #f0c8c8;
+}
+
+    .btn-delete:hover {
+        background: #ffe4e4;
+        color: var(--danger);
+    }
+
+.btn-secondary {
+    background: var(--bg);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+}
+
+    .btn-secondary:hover {
+        background: var(--border);
+        color: var(--text);
+    }
+
+.btn-sm {
+    padding: 6px 14px;
+    font-size: 13px;
+}
+
+.students-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.student-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+    .student-card:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+    }
+
+    .student-card .sc-header {
+        background: var(--navy);
+        padding: 14px 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-left: 4px solid var(--accent);
+    }
+
+    .student-card .sc-name {
+        font-family: 'Source Serif 4', serif;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--white);
+    }
+
+    .student-card .sc-num {
+        font-size: 12px;
+        color: rgba(200,169,110,0.9);
+        font-weight: 500;
+        letter-spacing: 0.5px;
+    }
+
+    .student-card .sc-body {
+        padding: 16px 18px;
+    }
+
+    .student-card .sc-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--bg);
+        font-size: 14px;
+    }
+
+        .student-card .sc-row:last-child {
+            border-bottom: none;
+        }
+
+    .student-card .sc-label {
+        color: var(--text-muted);
+        font-size: 12.5px;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+    }
+
+    .student-card .sc-value {
+        color: var(--text);
+        font-weight: 500;
+    }
+
+    .student-card .sc-footer {
+        padding: 12px 18px;
+        background: var(--bg);
+        border-top: 1px solid var(--border);
+        display: flex;
+        gap: 8px;
+        justify-content: flex-end;
+    }
+
+.badge {
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.4px;
+}
+
+.badge-adult {
+    background: #e8f5ee;
+    color: var(--success);
+    border: 1px solid #b8dfc9;
+}
+
+.badge-minor {
+    background: #fff4e0;
+    color: var(--warning);
+    border: 1px solid #f0ddb0;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--white);
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+    color: var(--text-muted);
+}
+
+    .empty-state p {
+        font-size: 15px;
+        margin-top: 8px;
+    }
+
+.record-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+    .record-bar h5 {
+        font-family: 'Source Serif 4', serif;
+        font-size: 17px;
+        color: var(--navy);
+    }
+
+    .record-bar .count {
+        font-size: 13px;
+        color: var(--text-muted);
+        background: var(--white);
+        border: 1px solid var(--border);
+        padding: 4px 12px;
+        border-radius: 20px;
+    }
+
+.sis-detail-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+    .sis-detail-card .dc-header {
+        background: var(--navy);
+        padding: 18px 28px;
+        border-left: 4px solid var(--accent);
+    }
+
+        .sis-detail-card .dc-header h4 {
+            font-family: 'Source Serif 4', serif;
+            font-size: 18px;
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .sis-detail-card .dc-header p {
+            font-size: 13px;
+            color: var(--accent);
+            margin-top: 2px;
+        }
+
+    .sis-detail-card .dc-body {
+        padding: 28px;
+    }
+
+.detail-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .detail-table tr {
+        border-bottom: 1px solid var(--bg);
+    }
+
+        .detail-table tr:last-child {
+            border-bottom: none;
+        }
+
+    .detail-table th {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 12px 0;
+        width: 140px;
+        vertical-align: top;
+    }
+
+    .detail-table td {
+        font-size: 15px;
+        color: var(--text);
+        padding: 12px 0;
+        font-weight: 400;
+    }
+
+.sis-detail-card .dc-footer {
+    padding: 16px 28px;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 10px;
+}
+
+.section-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 2rem 0;
+}
+
+.sis-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    padding: 10px 0;
+    z-index: 100;
+}
+
+    .sis-footer .inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .sis-footer span {
+        font-size: 12.5px;
+        color: var(--text-muted);
+    }
+
+    .sis-footer .ver {
+        font-size: 12px;
+        color: var(--border);
+    }
