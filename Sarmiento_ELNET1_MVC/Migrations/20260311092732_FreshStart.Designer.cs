@@ -11,8 +11,8 @@ using Sarmiento_ELNET1_MVC.Data;
 namespace Sarmiento_ELNET1_MVC.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260306131718_InitialCreate2")]
-    partial class InitialCreate2
+    [Migration("20260311092732_FreshStart")]
+    partial class FreshStart
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,10 +27,7 @@ namespace Sarmiento_ELNET1_MVC.Migrations
             modelBuilder.Entity("Sarmiento_ELNET1_MVC.Models.Student", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Age")
                         .HasColumnType("int");

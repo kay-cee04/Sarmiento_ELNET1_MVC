@@ -4,56 +4,52 @@
     ViewData["Title"] = "Edit Student";
 }
 
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
+<div class="page-title">Edit Student Record</div>
+<div class="page-subtitle">Update information for <strong>@Model.Name</strong>.</div>
 
-            <div class="card shadow border-0">
+<div class="sis-detail-card">
 
-                <div class="card-header bg-warning">
-                    <h4 class="mb-0">✏️ Edit Student</h4>
+    <div class="dc-header">
+        <h4>Edit Record</h4>
+        <p>Student ID: @Model.Id</p>
+    </div>
+
+    <div class="dc-body">
+        <form asp-action="Edit" method="post">
+
+            <input type="hidden" asp-for="Id" />
+
+            <div style="display: grid; gap: 18px;">
+
+                <div>
+                    <label asp-for="Name" class="form-label">Full Name</label>
+                    <input asp-for="Name" class="form-control" />
                 </div>
 
-                <div class="card-body p-4">
-                    <form asp-action="Edit" method="post">
-                        <input type="hidden" asp-for="Id" />
-
-                        <div class="mb-3">
-                            <label asp-for="Name" class="form-label fw-semibold">Full Name</label>
-                            <input asp-for="Name" class="form-control" />
-                        </div>
-
-                        <div class="mb-3">
-                            <label asp-for="Course" class="form-label fw-semibold">Course</label>
-                            <select asp-for="Course" class="form-select">
-                                <option value="">-- Select Course --</option>
-                                <option value="BSIT">BSIT</option>
-                                <option value="BSCS">BSCS</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label asp-for="Age" class="form-label fw-semibold">Age</label>
-                            <input asp-for="Age" class="form-control" placeholder="e.g. 20" />
-                        </div>
-
-                        <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-warning px-4">
-                                💾 Save Changes
-                            </button>
-
-                            <a asp-controller="Student"
-                               asp-action="Index"
-                               class="btn btn-secondary">
-                                ✖ Cancel
-                            </a>
-                        </div>
-
-                    </form>
-
+                <div>
+                    <label asp-for="Course" class="form-label">Course</label>
+                    <select asp-for="Course" class="form-select">
+                        <option value="">Select Course</option>
+                        <option value="BSIT">BSIT</option>
+                        <option value="BSCS">BSCS</option>
+                    </select>
                 </div>
+
+                <div>
+                    <label asp-for="Age" class="form-label">Age</label>
+                    <input asp-for="Age" class="form-control" placeholder="e.g. 20" min="1" max="99" />
+                </div>
+
             </div>
 
-        </div>
+            <div style="margin-top: 24px; display: flex; gap: 10px;">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a asp-controller="Student"
+                   asp-action="Index"
+                   class="btn btn-secondary">Cancel</a>
+            </div>
+
+        </form>
     </div>
+
 </div>

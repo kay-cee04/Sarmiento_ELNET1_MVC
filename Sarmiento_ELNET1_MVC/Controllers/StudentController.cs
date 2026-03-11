@@ -25,8 +25,19 @@ namespace Sarmiento_ELNET1_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                bool idExists = _context.Students.Any(s => s.Id == student.Id);
+
+                if (idExists)
+                {
+                    TempData["ErrorMessage"] = $"Student ID {student.Id} already exists. Please use a different ID.";
+                    List<Student> currentStudents = _context.Students.ToList();
+                    return View(currentStudents);
+                }
+
                 _context.Students.Add(student);
                 _context.SaveChanges();
+
+                TempData["SuccessMessage"] = $"Student {student.Name} has been added successfully.";
             }
 
             List<Student> students = _context.Students.ToList();
@@ -62,12 +73,13 @@ namespace Sarmiento_ELNET1_MVC.Controllers
             {
                 _context.Students.Update(student);
                 _context.SaveChanges();
+                TempData["SuccessMessage"] = $"Student {student.Name} has been updated successfully.";
                 return RedirectToAction("Index");
             }
 
             return View(student);
         }
-        
+
         [HttpGet]
         public IActionResult Delete(int id)
         {
@@ -77,6 +89,7 @@ namespace Sarmiento_ELNET1_MVC.Controllers
             {
                 _context.Students.Remove(student);
                 _context.SaveChanges();
+                TempData["SuccessMessage"] = $"Student record has been removed successfully.";
             }
 
             return RedirectToAction("Index");

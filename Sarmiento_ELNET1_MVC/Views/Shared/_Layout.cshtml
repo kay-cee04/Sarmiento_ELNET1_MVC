@@ -3,42 +3,41 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>@ViewData["Title"] - Student Information System</title>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <title>@ViewData["Title"] — Student Information System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="/">🎓 Student Information System</a>
-            <div class="navbar-nav ms-auto">
-                <a class="nav-link text-white"
-                   asp-controller="Student"
-                   asp-action="Index">📋 Students</a>
-
-                <a class="nav-link text-white"
-                   asp-controller="Student"
-                   asp-action="Create">➕ Add Student</a>
+    <nav class="sis-navbar">
+        <div class="navbar-inner">
+            <a class="brand" asp-controller="Student" asp-action="Index">
+                <div class="brand-logo">S</div>
+                <div>
+                    <span class="brand-text">Student Information System</span>
+                    <span class="brand-sub">Academic Records Management</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a asp-controller="Student" asp-action="Index">Student Records</a>
             </div>
         </div>
     </nav>
 
     <partial name="_Header" />
 
-    <main class="container my-4">
+    <main class="sis-main">
         @RenderBody()
     </main>
 
-    <footer class="bg-light py-3 mt-5 border-top text-muted fixed-bottom">
-        <div class="container">
-            <small>Student Information System &copy; @DateTime.Now.Year | ASP.NET Core MVC</small>
+    <footer class="sis-footer">
+        <div class="inner">
+            <span>Student Information System &copy; @DateTime.Now.Year</span>
+            <span class="ver">ASP.NET Core MVC</span>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    @RenderSection("Scripts", required: false)
 </body>
 </html>

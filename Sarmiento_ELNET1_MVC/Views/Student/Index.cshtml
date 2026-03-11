@@ -1,19 +1,44 @@
-﻿@model List<Student>
+﻿@* ============================================================
+   Views/Student/Index.cshtml
+   ============================================================ *@
+
+@model List<Student>
 
 @{
-    ViewData["Title"] = "Student List";
+    ViewData["Title"] = "Student Records";
 }
 
-<div class="container mt-4">
+<div class="page-title">Student Records</div>
+<div class="page-subtitle">Manage and view all enrolled student information.</div>
 
-    <div class="card p-4 shadow-sm mb-5">
-        <h3 class="mb-3">➕ Add Student</h3>
+@* ── SUCCESS MESSAGE ── *@
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert-msg alert-success-msg">
+        @TempData["SuccessMessage"]
+    </div>
+}
 
+@* ── ERROR MESSAGE ── *@
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert-msg alert-error-msg">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+@* ── ADD STUDENT FORM ── *@
+<div class="sis-form-card">
+    <div class="card-head">
+        <h5>New Student Entry</h5>
+        <span>All fields are required</span>
+    </div>
+    <div class="card-body">
         <form asp-action="Index" method="post">
-            <div class="row g-3">
+            <div style="display:grid; grid-template-columns: repeat(4,1fr); gap: 16px;">
 
-                <div class="col-md-3">
-                    <label class="form-label fw-semibold">Student ID</label>
+                <div>
+                    <label class="form-label">Student ID</label>
                     <input type="text"
                            name="Id"
                            class="form-control"
@@ -22,113 +47,124 @@
                            required />
                 </div>
 
-                <div class="col-md-3">
-                    <label class="form-label fw-semibold">Name</label>
-                    <input type="text" name="Name" class="form-control" required />
+                <div>
+                    <label class="form-label">Full Name</label>
+                    <input type="text"
+                           name="Name"
+                           class="form-control"
+                           required />
                 </div>
 
-                <div class="col-md-3">
-                    <label class="form-label fw-semibold">Course</label>
+                <div>
+                    <label class="form-label">Course</label>
                     <select name="Course" class="form-select" required>
-                        <option value="">-- Select Course --</option>
+                        <option value="">Select Course</option>
                         <option value="BSIT">BSIT</option>
                         <option value="BSCS">BSCS</option>
                     </select>
                 </div>
 
-                <div class="col-md-3">
-                    <label class="form-label fw-semibold">Age</label>
-                    <input type="number" name="Age" class="form-control" placeholder="e.g. 20" required />
+                <div>
+                    <label class="form-label">Age</label>
+                    <input type="number"
+                           name="Age"
+                           class="form-control"
+                           placeholder="e.g. 20"
+                           min="1"
+                           max="99"
+                           required />
                 </div>
 
             </div>
 
-            <button type="submit" class="btn btn-primary mt-3 px-4">
-                💾 Add Student
-            </button>
+            <div style="margin-top: 18px;">
+                <button type="submit" class="btn btn-primary">Add Student</button>
+            </div>
         </form>
     </div>
+</div>
 
-    @if (Model == null || Model.Count == 0)
-    {
-        <div class="alert alert-info text-center">
-            <strong>No students yet.</strong> Fill out the form above to add a student!
-        </div>
-    }
-    else
-    {
-        <h4 class="mb-3">🎓 Student Records — <span class="text-muted fs-6">@Model.Count student(s) found</span></h4>
+@* ── STUDENT CARDS ── *@
+@if (Model == null || Model.Count == 0)
+{
+    <div class="empty-state">
+        <div style="font-size:32px; margin-bottom:12px; opacity:0.3;">&#9679;</div>
+        <strong style="color: #1a2744;">No records found</strong>
+        <p>Use the form above to add a new student record.</p>
+    </div>
+}
+else
+{
+    <div class="record-bar">
+        <h5>Student Records</h5>
+        <span class="count">@Model.Count record(s)</span>
+    </div>
 
-        <div class="row g-4">
+    <div class="students-grid">
 
-            @{
-                int rowNum = 1;
-            }
+        @{
+            int rowNum = 1;
+        }
 
-            @foreach (var student in Model)
-            {
-                <div class="col-md-4">
-                    <div class="card shadow-sm h-100 border-0">
+        @foreach (var student in Model)
+        {
+            <div class="student-card">
 
-                        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                            <span class="fw-bold">🎓 @student.Name</span>
-                            <span class="badge bg-light text-primary">#@rowNum</span>
-                        </div>
+                <div class="sc-header">
+                    <span class="sc-name">@student.Name</span>
+                    <span class="sc-num">No. @rowNum</span>
+                </div>
 
-                        <div class="card-body">
-                            <p class="mb-2">
-                                <strong>📚 Course:</strong>
-                                <span class="text-primary fw-semibold">@student.Course</span>
-                            </p>
-                            <p class="mb-2">
-                                <strong>🎂 Age:</strong> @student.Age years old
-                            </p>
-                            <p class="mb-2">
-                                <strong>📋 Status:</strong>
-                                @if (student.Age >= 18)
-                                {
-                                    <span class="badge bg-success">✅ Adult</span>
-                                }
-                                else
-                                {
-                                    <span class="badge bg-warning text-dark">⚠️ Minor</span>
-                                }
-                            </p>
-                        </div>
-
-                        <div class="card-footer bg-transparent border-top d-flex gap-2 justify-content-end">
-
-                            <a asp-controller="Student"
-                               asp-action="Details"
-                               asp-route-id="@student.Id"
-                               class="btn btn-info btn-sm text-white">
-                                👁️ View
-                            </a>
-
-                            <a asp-controller="Student"
-                               asp-action="Edit"
-                               asp-route-id="@student.Id"
-                               class="btn btn-warning btn-sm">
-                                ✏️ Edit
-                            </a>
-
-                            <a asp-controller="Student"
-                               asp-action="Delete"
-                               asp-route-id="@student.Id"
-                               class="btn btn-danger btn-sm"
-                               onclick="return confirm('Are you sure you want to delete @student.Name?')">
-                                🗑️ Delete
-                            </a>
-
-                        </div>
-
+                <div class="sc-body">
+                    <div class="sc-row">
+                        <span class="sc-label">Student ID</span>
+                        <span class="sc-value">@student.Id</span>
+                    </div>
+                    <div class="sc-row">
+                        <span class="sc-label">Course</span>
+                        <span class="sc-value">@student.Course</span>
+                    </div>
+                    <div class="sc-row">
+                        <span class="sc-label">Age</span>
+                        <span class="sc-value">@student.Age years old</span>
+                    </div>
+                    <div class="sc-row">
+                        <span class="sc-label">Status</span>
+                        <span>
+                            @if (student.Age >= 18)
+                            {
+                                <span class="badge badge-adult">Adult</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-minor">Minor</span>
+                            }
+                        </span>
                     </div>
                 </div>
 
-                rowNum++;
-            }
+                <div class="sc-footer">
+                    <a asp-controller="Student"
+                       asp-action="Details"
+                       asp-route-id="@student.Id"
+                       class="btn btn-view btn-sm">View</a>
 
-        </div>
-    }
+                    <a asp-controller="Student"
+                       asp-action="Edit"
+                       asp-route-id="@student.Id"
+                       class="btn btn-edit btn-sm">Edit</a>
 
-</div>
+                    <a asp-controller="Student"
+                       asp-action="Delete"
+                       asp-route-id="@student.Id"
+                       class="btn btn-delete btn-sm"
+                       onclick="return confirm('Remove @student.Name from records?')">Delete</a>
+                </div>
+
+            </div>
+
+            rowNum++;
+        }
+
+    </div>
+}

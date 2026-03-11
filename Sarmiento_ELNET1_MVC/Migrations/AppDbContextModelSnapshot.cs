@@ -24,10 +24,7 @@ namespace Sarmiento_ELNET1_MVC.Migrations
             modelBuilder.Entity("Sarmiento_ELNET1_MVC.Models.Student", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
